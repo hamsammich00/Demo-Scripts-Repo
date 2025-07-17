@@ -4,6 +4,8 @@
 #It distinguishes between Debian-based and RedHat-based distributions. They are very similar.
 #github.com/hamsammich00
 #7/16/25
+#Use below to deploy
+#ansible-playbook Setup_Auto_Updates.yml --ask-pass  --ask-become-pass
 #################################################################################################################
 ---
 - name: setup_autoupdates
