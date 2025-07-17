@@ -92,7 +92,8 @@
     - name: Configure dnf-automatic
       ansible.builtin.copy:
         dest: /etc/dnf/automatic.conf
-        content: |       #This is the configuration file for dnf-automatic
+#This is the configuration file for dnf-automatic
+        content: |
           [commands]
           upgrade_type = default
           random_sleep = 0
