@@ -1,0 +1,102 @@
+#################################################################################################################
+#Description
+#This is an ansible Playbook I made for my Linux environment to set up automatic updates.
+#It distinguishes between Debian-based and RedHat-based distributions. They are very similar.
+#github.com/hamsammich00
+#7/16/25
+#################################################################################################################
+---
+- name: setup_autoupdates
+  hosts: debian
+  become: yes
+  tasks:
+
+#debain block
+    - name: Install unattended-upgrades
+      ansible.builtin.apt:
+        name: unattended-upgrades 
+        state: present  #this checks for and installs if not already
+        update_cache: yes
+      when: ansible_os_family == "Debian" #makes sure its ran on Debian only
+
+    - name: Overwrite the config file
+      ansible.builtin.copy:
+        dest: /etc/apt/apt.conf.d/20auto-upgrades #config file path
+        content: |
+          APT::Periodic::Download-Upgradeable-Packages "1"; #Download updates daily
+          APT::Periodic::AutocleanInterval "7"; #cleanup once a week
+          APT::Periodic::Unattended-Upgrade "1";
+        owner: root #owner, group, and permissions of the created file
+        group: root
+        mode: '0644'
+      when: ansible_os_family == "Debian"
+
+
+    - name: Enable automatic reboots
+      ansible.builtin.copy:
+        dest: /etc/apt/apt.conf.d/50unattended-upgrades #other config file to be changed to allow reboots
+        content: |
+          Unattended-Upgrade::Allowed-Origins {
+              "${distro_id}:${distro_codename}-security";
+          };
+
+          Unattended-Upgrade::Automatic-Reboot "true"; #enable auto reboots
+          Unattended-Upgrade::Automatic-Reboot-Time "01:00"; #1am reboots
+        owner: root 
+        group: root
+        mode: '0644'
+      when: ansible_os_family == "Debian"
+
+    - name: Modify MOTD script to display unattended-upgrades logs #Just a little nice to have
+      ansible.builtin.copy:
+        dest: /etc/update-motd.d/91-unattended-upgrades
+        content: |
+            #!/bin/sh
+            LOG_FILE="/var/log/unattended-upgrades/unattended-upgrades.log"
+
+            if [ -f "$LOG_FILE" ]; then
+                    echo ""
+                    echo "🛠  Last unattended-upgrades activity:"
+                    tail -n 10 "$LOG_FILE"
+                    echo ""
+                    fi
+        owner: root
+        group: root
+        mode: '0755'
+      when: ansible_os_family == "Debian"
+
+    - name: Ensure unattended-upgrades deamon running #makes sure the daemon is started
+      ansible.builtin.systemd:
+        name: unattended-upgrades
+        enabled: yes
+        state: started
+      when: ansible_os_family == "Debian"
+
+#################################################################################################################
+#RHEL block, less comments as its more or less the same
+#I couldn't script out the reboot command, but the default is at 6AM which is reasonable
+#I will revisit this later
+#################################################################################################################
+    - name: Install dnf-automatic
+      ansible.builtin.yum:
+        name: dnf-automatic
+        state: present 
+      when: ansible_os_family == "RedHat"
+
+    - name: Configure dnf-automatic
+      ansible.builtin.copy:
+        dest: /etc/dnf/automatic.conf
+        content: |       #This is the configuration file for dnf-automatic
+          [commands]
+          upgrade_type = default
+          random_sleep = 0
+          reboot = true
+          reboot_command = /usr/bin/systemctl reboot
+
+          [emitters]
+          emit_via = motd       #I personally like this, it shows updates in the message of the day
+        owner: root
+        group: root
+        mode: '0644'
+      when: ansible_os_family == "RedHat"
+
