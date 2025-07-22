@@ -9,7 +9,9 @@ if (-not (Get-Module -ListAvailable -Name $ModuleName)) {
 }
 
 #The actual updates
-Get-WindowsUpdate -MicrosoftUpdate -Install -AcceptAll
+Get-WindowsUpdate -MicrosoftUpdate -Install 
+#Add the commented line below after -install to just auto accept all
+# -AcceptAll
 
-#Add the below line to cause an automatic reboot after installation, usefull for servers especially 
+#Add the commented line below after -isntall to cause an automatic reboot after installation
 # -AutoReboot
