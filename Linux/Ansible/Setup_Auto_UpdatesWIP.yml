@@ -1,5 +1,5 @@
 #################################################################################################################
-#Description
+#Description WORK IN PROGESS
 #This is an ansible Playbook I made for my Linux environment to set up automatic updates.
 #It distinguishes between Debian-based and RedHat-based distributions. They are very similar.
 #github.com/hamsammich00
