@@ -1,13 +1,15 @@
 #################################################################################################################
-#Description
+#Description WORK IN PROGESS
 #This is an ansible Playbook I made for my Linux environment to set up automatic updates.
 #It distinguishes between Debian-based and RedHat-based distributions. They are very similar.
 #github.com/hamsammich00
 #7/16/25
+#Use below to deploy
+#ansible-playbook Setup_Auto_Updates.yml --ask-pass  --ask-become-pass
 #################################################################################################################
 ---
 - name: setup_autoupdates
-  hosts: debian
+  hosts: Linux
   become: yes
   tasks:
 
@@ -90,7 +92,8 @@
     - name: Configure dnf-automatic
       ansible.builtin.copy:
         dest: /etc/dnf/automatic.conf
-        content: |       #This is the configuration file for dnf-automatic
+#This is the configuration file for dnf-automatic
+        content: |
           [commands]
           upgrade_type = default
           random_sleep = 0
