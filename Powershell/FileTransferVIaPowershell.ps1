@@ -43,12 +43,11 @@ $browseButton.Size = New-Object System.Drawing.Size(60, 23)
 $form.Controls.Add($browseButton)
 
 $browseButton.Add_Click({
-    $dialog = New-Object System.Windows.Forms.FolderBrowserDialog
-    $dialog.Description = "Select a folder or paste a path"
-    $dialog.ShowNewFolderButton = $true
+    $dialog = New-Object System.Windows.Forms.OpenFileDialog
+    $dialog.Filter = "All files (*.*)|*.*"
 
     if ($dialog.ShowDialog() -eq "OK") {
-        $LocalFolder.Text = $dialog.SelectedPath
+        $LocalFolder.Text = $dialog.FileName
     }
 })
 
@@ -93,5 +92,3 @@ $button.Add_Click({
     })
 
 [void]$form.ShowDialog()
-
-
