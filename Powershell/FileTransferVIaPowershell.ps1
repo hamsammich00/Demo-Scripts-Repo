@@ -3,7 +3,7 @@
 #Messing with forms and file transfer in powershell
 #Makes a form that allows you to use powershell to transfer files to a remote computer
 #Very crude, but it works
-#github.com/hamsammich00/Demo-Scripts
+#github.com/hamsammich00/Demo-Scripts-Repo
 #7/22/25
 #################################################################################################################
 
