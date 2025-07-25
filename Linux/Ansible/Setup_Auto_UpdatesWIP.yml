@@ -2,7 +2,7 @@
 #Description WORK IN PROGESS
 #This is an ansible Playbook I made for my Linux environment to set up automatic updates.
 #It distinguishes between Debian-based and RedHat-based distributions. They are very similar.
-#github.com/hamsammich00/Demo-Scripts
+#github.com/hamsammich00/Demo-Scripts-Repo
 #7/16/25
 #Use below to deploy
 #ansible-playbook Setup_Auto_Updates.yml --ask-pass  --ask-become-pass
