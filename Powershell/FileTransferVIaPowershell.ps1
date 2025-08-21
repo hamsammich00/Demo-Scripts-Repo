@@ -31,14 +31,14 @@ $form.Controls.Add($textbox)
 # Textbox $LocalFolder
 # Local File Path textbox and Browse button
 $LocalFolder = New-Object System.Windows.Forms.TextBox
-$LocalFolder.Location = New-Object System.Drawing.Point(180, 50)
+$LocalFolder.Location = New-Object System.Drawing.Point(180, 100)
 $LocalFolder.Size = New-Object System.Drawing.Size(180, 50) 
 $LocalFolder.Text = "Local File Path"
 $form.Controls.Add($LocalFolder)
 
 $browseButton = New-Object System.Windows.Forms.Button
 $browseButton.Text = "Browse"
-$browseButton.Location = New-Object System.Drawing.Point(100, 50)
+$browseButton.Location = New-Object System.Drawing.Point(100, 100)
 $browseButton.Size = New-Object System.Drawing.Size(60, 23)
 $form.Controls.Add($browseButton)
 
@@ -54,13 +54,13 @@ $browseButton.Add_Click({
 # Textbox $DestinationFolder
 $Destlabel = New-Object System.Windows.Forms.Label
 $Destlabel.Text = "Destination File Path:"
-$Destlabel.Location = New-Object System.Drawing.Point(10,100)
+$Destlabel.Location = New-Object System.Drawing.Point(10,50)
 $Destlabel.AutoSize = $true
 $form.Controls.Add($Destlabel)
 $DestinationFolder = New-Object System.Windows.Forms.TextBox
-$DestinationFolder.Location = New-Object System.Drawing.Point(180,100)
+$DestinationFolder.Location = New-Object System.Drawing.Point(180,50)
 $DestinationFolder.Size = New-Object System.Drawing.Size(180,100)
-$DestinationFolder.Text = "Target File Path"
+$DestinationFolder.Text = "Target File Path (Folder)"
 $form.Controls.Add($DestinationFolder)
 
 # Button
