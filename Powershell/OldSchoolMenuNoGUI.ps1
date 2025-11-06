@@ -45,10 +45,12 @@ do {
 
 	try
 		{
-		Process-Menu -choice $userChoice}
-
+		Process-Menu -choice $userChoice
+		}
 	catch
 		{
-        $script:Output = "Numbers only!!!"}
-
+        $script:Output = "Error has occured.
+        $($_.Exception.Message)"
+		}
 } while ($true)
+
