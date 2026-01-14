@@ -1,0 +1,1 @@
+$ModuleName="PSWindowsUpdate";if(-not(Get-Module -ListAvailable -Name $ModuleName)){Install-Module $ModuleName -Scope AllUsers -Force};Import-Module $ModuleName -Force;Get-WindowsUpdate -MicrosoftUpdate -Install -AcceptAll;Read-Host "Press Enter to exit"
