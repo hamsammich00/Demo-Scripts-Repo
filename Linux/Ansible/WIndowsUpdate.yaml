@@ -13,8 +13,3 @@
           - UpdateRollups
         reboot: no
       register: update_result
-
-    - name: Reboot if required
-      ansible.windows.win_reboot:
-        reboot_timeout: 3600
-      when: update_result.reboot_required
