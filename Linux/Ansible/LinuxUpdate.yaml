@@ -1,0 +1,26 @@
+---
+- name: Update all common Linux distros
+  hosts: linux
+  become: true
+  gather_facts: true
+
+  tasks:
+    - name: Update APT
+      ansible.builtin.apt:
+        update_cache: yes
+        upgrade: dist
+        autoremove: yes
+        autoclean: yes
+      when: ansible_facts.os_family == "Debian"
+
+    - name: Update DNF/YUM
+      ansible.builtin.dnf:
+        name: "*"
+        state: latest
+      when: ansible_facts.os_family == "RedHat"
+
+    - name: Update Zypper
+      ansible.builtin.zypper:
+        name: "*"
+        state: latest
+      when: ansible_facts.os_family == "Suse"
