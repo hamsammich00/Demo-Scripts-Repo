@@ -1,5 +1,5 @@
 ---
-- name: Update all common Linux distros
+- name: Update my common distros
   hosts: linux
   become: true
   gather_facts: true
@@ -18,9 +18,3 @@
         name: "*"
         state: latest
       when: ansible_facts.os_family == "RedHat"
-
-    - name: Update Zypper
-      ansible.builtin.zypper:
-        name: "*"
-        state: latest
-      when: ansible_facts.os_family == "Suse"
