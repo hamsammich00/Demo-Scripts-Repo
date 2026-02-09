@@ -1,7 +1,7 @@
 param(
     [string]$DomainName = "hamsammich.local",
     [string]$SharePath = "\\fileshare\FileshareMain",
-    [string]$DriveLetter = "S",
+    [string]$DriveLetter = "F",
     [string]$OUPath = ""
 )
 
