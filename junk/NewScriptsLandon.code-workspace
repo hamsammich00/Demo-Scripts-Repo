@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"name": "Demo-Scripts-Repo",
+			"path": "../scriptsjunk/Demo-Scripts-Repo"
+		}
+	],
+	"settings": {
+		"powershell.cwd": "Demo-Scripts-Repo"
+	}
+}
